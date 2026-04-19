@@ -28,8 +28,8 @@ if salle_trouvee:
 
 
 liste = dao.get_salles()
-for s in liste:
-    print(s.afficher_infos())
+for x in liste:
+    print(x.afficher_infos())
 
 
 dao.delete_salle("C22")
