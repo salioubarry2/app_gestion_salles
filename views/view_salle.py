@@ -128,3 +128,16 @@ class ViewSalle(ctk.CTk):
 
         except ValueError:
             messagebox.showerror("Erreur", "La capacité doit être un nombre entier.")
+
+    def supprimer_salle(self):
+        code = self.entryCode.get()
+        if not code:
+            messagebox.showerror("Erreur", "Veuillez saisir le code de la salle.")
+            return
+        ok, message = self.service_salle.supprimer_salle(code)
+        if ok:
+            messagebox.showinfo("Succès", message)
+            self.vider_champs()
+            self.lister_salles()
+        else:
+            messagebox.showerror("Erreur", message)
