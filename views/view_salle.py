@@ -80,3 +80,30 @@ class ViewSalle(ctk.CTk):
         self.entryCategorie.delete(0, "end")
 
         self.entryCapacite.delete(0, "end")
+
+    def ajouter_salle(self):
+
+        try:
+
+            code = self.entryCode.get()
+
+            description = self.entryDescription.get()
+
+            categorie = self.entryCategorie.get()
+
+            capacite = int(self.entryCapacite.get())
+
+            salle = Salle(code, description, categorie, capacite)
+
+            ok, message = self.service_salle.ajouter_salle(salle)
+
+            if ok:
+
+                messagebox.showinfo("Succès", message)
+
+                self.vider_champs()
+                self.lister_salles()
+            else:
+                messagebox.showerror("Erreur", message)
+        except ValueError:
+            messagebox.showerror("Erreur", "La capacité doit être un nombre entier.")
