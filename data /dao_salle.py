@@ -7,25 +7,16 @@ from models.salle import Salle
 class DataSalle:
 
     def __init__(self):
-
         pass
-
     def get_connection(self):
-
         with open("data/config.json", "r", encoding="utf-8") as fichier:
-
             config = json.load(fichier)
-
         connexion = mysql.connector.connect(
-
             host=config["host"],
-
             user=config["user"],
             password=config["Python2026"],
             database=config["db_salles"]
-
         )
-
         return connexion
 
     def insert_salle(self, salle):
@@ -36,6 +27,20 @@ class DataSalle:
         VALUES (%s, %s, %s, %s)
         """
         valeurs = (salle.code, salle.description, salle.categorie, salle.capacite)
+        curseur.execute(requete, valeurs)
+        connexion.commit()
+        curseur.close()
+        connexion.close()
+
+    def update_salle(self, salle):
+        connexion = self.get_connection()
+        curseur = connexion.cursor()
+        requete = """
+        UPDATE salle
+        SET description = %s, categorie = %s, capacite = %s
+        WHERE code = %s
+        """
+        valeurs = (salle.description, salle.categorie, salle.capacite, salle.code)
         curseur.execute(requete, valeurs)
         connexion.commit()
         curseur.close()
