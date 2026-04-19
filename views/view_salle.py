@@ -71,3 +71,12 @@ class ViewSalle(ctk.CTk):
         self.treeList.column("capacite", width=100)
         self.treeList.pack(expand=True, fill="both", padx=10, pady=10)
         self.lister_salles()
+
+    def vider_champs(self):
+        self.entryCode.delete(0, "end")
+
+        self.entryDescription.delete(0, "end")
+
+        self.entryCategorie.delete(0, "end")
+
+        self.entryCapacite.delete(0, "end")
