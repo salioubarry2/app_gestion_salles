@@ -33,3 +33,9 @@ class ServiceSalle:
             return False, "Salle introuvable."
         self.dao_salle.delete_salle(code)
         return True, "Salle supprimée avec succès."
+
+    def rechercher_salle(self, code):
+
+        return self.dao_salle.get_salle(code)
+    def recuperer_salles(self):
+        return self.dao_salle.get_salles()
