@@ -25,3 +25,11 @@ class ServiceSalle:
             return False, "La salle à modifier n'existe pas."
         self.dao_salle.update_salle(salle)
         return True, "Salle modifiée avec succès."
+
+    def supprimer_salle(self, code):
+
+        salle_existante = self.dao_salle.get_salle(code)
+        if not salle_existante:
+            return False, "Salle introuvable."
+        self.dao_salle.delete_salle(code)
+        return True, "Salle supprimée avec succès."
