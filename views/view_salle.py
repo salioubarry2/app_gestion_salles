@@ -141,3 +141,19 @@ class ViewSalle(ctk.CTk):
             self.lister_salles()
         else:
             messagebox.showerror("Erreur", message)
+
+    def rechercher_salle(self):
+        code = self.entryCode.get()
+        if not code:
+            messagebox.showerror("Erreur", "Veuillez saisir le code de la salle.")
+            return
+        salle = self.service_salle.rechercher_salle(code)
+        if salle:
+            self.entryDescription.delete(0, "end")
+            self.entryDescription.insert(0, salle.description)
+            self.entryCategorie.delete(0, "end")
+            self.entryCategorie.insert(0, salle.categorie)
+            self.entryCapacite.delete(0, "end")
+            self.entryCapacite.insert(0, str(salle.capacite))
+        else:
+            messagebox.showerror("Erreur", "Salle introuvable.")
