@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS db_salles;
+CREATE USER IF NOT EXISTS 'user_python'@'127.0.0.1' IDENTIFIED BY 'Python2026';
+GRANT ALL PRIVILEGES ON db_salles.* TO 'user_python'@'127.0.0.1';
+FLUSH PRIVILEGES;
+USE db_salles;
+CREATE TABLE IF NOT EXISTS salle (
+code VARCHAR(5) PRIMARY KEY,
+description VARCHAR(50),
+categorie VARCHAR(50),
+capacite INT
+);
