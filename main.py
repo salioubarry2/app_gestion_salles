@@ -1,36 +1,24 @@
-from datta.dao_salle import DataSalle
 from models.salle import Salle
+from services.service_salle import ServiceSalle
 
-dao = DataSalle()
+service = ServiceSalle()
 
-try:
-    connexion = dao.get_connection()
-    print("Connexion réussie")
-    connexion.close()
-except Exception as e:
-    print("Erreur connexion :", e)
+salle1 = Salle("A21", "Salle informatique", "Laboratoire", 60)
+ok, message = service.ajouter_salle(salle1)
+print(message)
 
-
-s1 = Salle("C22", "Salle Programmeur", "Laboratoire", 35)
-dao.insert_salle(s1)
-print("Salle ajoutée")
+salle2 = Salle("A21", "Salle informatique principale", "Laboratoire", 95)
+ok, message = service.modifier_salle(salle2)
+print(message)
 
 
-s1.description = "Salle reseautique"
-s1.capacite = 50
-dao.update_salle(s1)
-print("Salle modifiée")
+resultat = service.rechercher_salle("A101")
+if resultat:
+    print(resultat.afficher_infos())
+liste = service.recuperer_salle()
+for salle in liste:
+    print(salle.afficher_infos())
 
 
-salle_trouvee = dao.get_salle("C22")
-if salle_trouvee:
-    print(salle_trouvee.afficher_infos())
-
-
-liste = dao.get_salles()
-for x in liste:
-    print(x.afficher_infos())
-
-
-dao.delete_salle("C22")
-print("Salle supprimée")
+ok, message = service.supprimer_salle("A21")
+print(message)
