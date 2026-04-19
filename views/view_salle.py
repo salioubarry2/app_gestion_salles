@@ -41,3 +41,33 @@ class ViewSalle(ctk.CTk):
         self.btnModifier.grid(row=0, column=2, padx=10, pady=10)
         self.btnRechercher = ctk.CTkButton(self.cadreActions, text="Rechercher", command=self.rechercher_salle)
         self.btnRechercher.grid(row=0, column=3, padx=10, pady=10)
+
+        # Cadre liste des salles
+
+        self.cadreList = ctk.CTkFrame(self, corner_radius=10, width=400)
+
+        self.cadreList.pack(pady=10, padx=10, fill="both", expand=True)
+
+        self.treeList = ttk.Treeview(
+
+            self.cadreList,
+
+            columns=("code", "description", "categorie", "capacite"),
+
+            show="headings"
+
+        )
+
+        self.treeList.heading("code", text="CODE")
+
+        self.treeList.heading("description", text="Description")
+
+        self.treeList.heading("categorie", text="Catégorie")
+
+        self.treeList.heading("capacite", text="Capacité")
+        self.treeList.column("code", width=80)
+        self.treeList.column("description", width=180)
+        self.treeList.column("categorie", width=120)
+        self.treeList.column("capacite", width=100)
+        self.treeList.pack(expand=True, fill="both", padx=10, pady=10)
+        self.lister_salles()
